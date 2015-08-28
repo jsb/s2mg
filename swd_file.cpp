@@ -2,6 +2,7 @@
 #include "swd_file_load_error.hpp"
 
 #include <fstream>
+#include <cstring>
 
 namespace s2mg {
 
@@ -46,7 +47,8 @@ void swd_file::read(std::istream& _infile)
         if (b.header.height != header.height) {
             throw swd_file_load_error{"Block height does not match map height"};
         }
-        if (b.header.block_size != header.width * header.height) {
+
+        if (static_cast<int>(b.header.block_size) != header.width * header.height) {
             throw swd_file_load_error{"Block data size does not match block dimensions"};
         }
         b.data.resize(b.header.block_size);
@@ -91,7 +93,7 @@ void swd_file::write(std::ostream& _outfile) const
     }
 
     // Write terminal 0xFF
-    _outfile.put(0xFF);
+    _outfile.put('\xFF');
 }
 
 }

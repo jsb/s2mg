@@ -2,6 +2,7 @@
 #include <fstream>
 #include <cstdio>
 #include <cstdlib>
+#include <ctime>
 
 #include "swd_file.hpp"
 
@@ -20,7 +21,7 @@ int main()
     auto& tri_block_up = f.blocks[1];
     //auto& tri_block_down = f.blocks[2];
 
-    srand(time(nullptr));
+    std::srand(std::time(nullptr));
     for (uint16_t y = 0; y < f.header.height; ++y) {
         std::printf("%2d: ", y);
         for (uint16_t x = 0; x < f.header.width; ++x) {
