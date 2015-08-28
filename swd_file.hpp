@@ -24,9 +24,6 @@ public:
 
     void write(const std::string& _filename) const;
     void write(std::ostream& _outfile) const;
-
-private:
-
 };
 
 }
