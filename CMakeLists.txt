@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 2.8)
+cmake_minimum_required(VERSION 2.8.12)
 project(s2mg)
 
 file(GLOB S2MG_SOURCE_FILES *.cpp)
