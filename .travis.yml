@@ -10,4 +10,4 @@ install:
   - cd build
   - cmake ..
   - make
-# script: cd build && ./test
+script: true
