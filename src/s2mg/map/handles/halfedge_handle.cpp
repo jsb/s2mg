@@ -1,13 +1,41 @@
 #include "halfedge_handle.hpp"
+#include "face_handle.hpp"
+#include "vertex_handle.hpp"
 #include "edge_handle.hpp"
 
 #include <cassert>
 
 namespace s2mg {
 
+face_handle halfedge_handle::fh() const
+{
+    return {map(), index() / 3};
+}
+
+vertex_handle halfedge_handle::to_vh() const
+{
+    auto aux = *this;
+    while ((aux.index() % 6) != 2 && (aux.index() % 6) != 4) {
+        aux = aux.next().opp();
+    }
+    return {map(), aux.index() / 6};
+}
+
+vertex_handle halfedge_handle::from_vh() const
+{
+    return prev().to_vh();
+}
+
 edge_handle halfedge_handle::eh() const
 {
-    return {map(), index() / 2};
+    auto halfedge_index = index() % 6;
+    if (halfedge_index < 3) {
+        auto cell_index = index() / 6;
+        return {map(), 3 * cell_index + halfedge_index};
+    }
+    else {
+        return opp().eh();
+    }
 }
 
 halfedge_handle halfedge_handle::opp() const
@@ -48,7 +76,8 @@ halfedge_handle halfedge_handle::opp() const
             return {map(), (map().cols() * row + col) * 6 + new_halfedge_index};
         }
     }
-    assert(false); // never reached
+    assert(false);
+    return *this; // never reached
 }
 
 halfedge_handle halfedge_handle::next() const

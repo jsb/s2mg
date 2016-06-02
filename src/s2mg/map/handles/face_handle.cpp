@@ -6,7 +6,7 @@ namespace s2mg {
 
 halfedge_handle face_handle::heh() const
 {
-    return {map(), index() * 6};
+    return {map(), index() * 3};
 }
 
 vertex_handle face_handle::vh() const

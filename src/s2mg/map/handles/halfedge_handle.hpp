@@ -4,7 +4,9 @@
 
 namespace s2mg {
 
-struct edge_handle;
+class face_handle;
+class vertex_handle;
+class edge_handle;
 
 class halfedge_handle : public map_handle
 {
@@ -13,6 +15,12 @@ public:
         map_handle(_map, _index)
     {
     }
+
+    face_handle fh() const;
+
+    vertex_handle to_vh() const;
+
+    vertex_handle from_vh() const;
 
     edge_handle eh() const;
 
