@@ -9,7 +9,7 @@ protected:
     s2mg::map_dimensions map{5, 4};
 };
 
-TEST_F(map_iterator_test, halfedge_opp_opp) {
+TEST_F(map_iterator_test, expected_range_sizes) {
     EXPECT_EQ(static_cast<std::ptrdiff_t>(map.n_vertices()),  std::distance(map.vertices().begin(),  map.vertices().end()));
     EXPECT_EQ(static_cast<std::ptrdiff_t>(map.n_faces()),     std::distance(map.faces().begin(),     map.faces().end()));
     EXPECT_EQ(static_cast<std::ptrdiff_t>(map.n_halfedges()), std::distance(map.halfedges().begin(), map.halfedges().end()));

@@ -7,6 +7,11 @@ namespace s2mg {
 class halfedge_handle;
 class vertex_handle;
 
+class face_vertex_range;
+class face_face_range;
+class face_halfedge_range;
+class face_edge_range;
+
 class face_handle : public map_handle
 {
 public:
@@ -20,6 +25,11 @@ public:
 
     //! One arbitrary vertex that is incident to the face
     vertex_handle vh() const;
+
+    face_vertex_range   incident_vertices() const;
+    face_face_range     adjacent_faces() const;
+    face_halfedge_range incident_halfedges() const;
+    face_edge_range     incident_edges() const;
 };
 
 }
