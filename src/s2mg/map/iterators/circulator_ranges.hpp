@@ -10,6 +10,7 @@ class circulator_range
 public:
     using circulator = Circulator;
     using input_handle = typename circulator::navigation_policy::input_handle;
+
     explicit circulator_range(const input_handle& _input) :
         input_(_input)
     {
@@ -17,36 +18,26 @@ public:
 
     circulator begin() const
     {
-        return {input_};
+        return circulator{input_};
     }
 
-    generic_end_circulator end() const
+    circulator end() const
     {
-        return {};
+        return circulator{input_};
     }
 
 private:
     input_handle input_;
 };
 
+class vertex_vertex_range   : public circulator_range<vertex_vertex_circulator>   { using circulator_range::circulator_range; };
+class vertex_face_range     : public circulator_range<vertex_face_circulator>     { using circulator_range::circulator_range; };
+class vertex_halfedge_range : public circulator_range<vertex_halfedge_circulator> { using circulator_range::circulator_range; };
+class vertex_edge_range     : public circulator_range<vertex_edge_circulator>     { using circulator_range::circulator_range; };
 
-#define S2MG_MAKE_CIRCULATOR_RANGE(name_stem) \
-    class name_stem ## _range : public circulator_range<name_stem ## _circulator> { \
-    public: \
-        name_stem ## _range(const circulator_range::input_handle& _input) : circulator_range(_input) {} \
-        name_stem ## _range(const name_stem ## _range&) = default; \
-    };
-
-S2MG_MAKE_CIRCULATOR_RANGE(vertex_vertex)
-S2MG_MAKE_CIRCULATOR_RANGE(vertex_face)
-S2MG_MAKE_CIRCULATOR_RANGE(vertex_halfedge)
-S2MG_MAKE_CIRCULATOR_RANGE(vertex_edge)
-
-S2MG_MAKE_CIRCULATOR_RANGE(face_vertex)
-S2MG_MAKE_CIRCULATOR_RANGE(face_face)
-S2MG_MAKE_CIRCULATOR_RANGE(face_halfedge)
-S2MG_MAKE_CIRCULATOR_RANGE(face_edge)
-
-#undef S2MG_MAKE_CIRCULATOR_RANGE
+class face_vertex_range     : public circulator_range<face_vertex_circulator>     { using circulator_range::circulator_range; };
+class face_face_range       : public circulator_range<face_face_circulator>       { using circulator_range::circulator_range; };
+class face_halfedge_range   : public circulator_range<face_halfedge_circulator>   { using circulator_range::circulator_range; };
+class face_edge_range       : public circulator_range<face_edge_circulator>       { using circulator_range::circulator_range; };
 
 }

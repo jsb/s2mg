@@ -22,22 +22,22 @@ face_handle vertex_handle::fh(face_orientation _orientation) const
 
 vertex_vertex_range vertex_handle::adjacent_vertices() const
 {
-    return {*this};
+    return vertex_vertex_range{*this};
 }
 
 vertex_face_range vertex_handle::incident_faces() const
 {
-    return {*this};
+    return vertex_face_range{*this};
 }
 
 vertex_halfedge_range vertex_handle::incident_halfedges() const
 {
-    return {*this};
+    return vertex_halfedge_range{*this};
 }
 
 vertex_edge_range vertex_handle::incident_edges() const
 {
-    return {*this};
+    return vertex_edge_range{*this};
 }
 
 }

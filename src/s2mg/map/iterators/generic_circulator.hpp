@@ -2,14 +2,12 @@
 
 #include "../handles.hpp"
 
+#include <iterator>
+
 namespace s2mg {
 
-class generic_end_circulator
-{
-};
-
 template<typename NavigationPolicy>
-class generic_circulator
+class generic_circulator : public std::iterator<std::forward_iterator_tag, typename NavigationPolicy::output_handle>
 {
 public:
     using navigation_policy = NavigationPolicy;
@@ -26,6 +24,7 @@ public:
         if (heh_ == initial_heh_) {
             ++num_cycles_;
         }
+        return *this;
     }
 
     typename NavigationPolicy::output_handle operator*() const
@@ -33,12 +32,12 @@ public:
         return NavigationPolicy::access(heh_);
     }
 
-    bool operator==(const generic_end_circulator&) const
+    bool operator==(const generic_circulator&) const
     {
         return num_cycles_ >= 1;
     }
 
-    bool operator!=(const generic_end_circulator& _rhs) const
+    bool operator!=(const generic_circulator& _rhs) const
     {
         return !operator==(_rhs);
     }

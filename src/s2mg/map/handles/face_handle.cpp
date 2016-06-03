@@ -17,22 +17,22 @@ vertex_handle face_handle::vh() const
 
 face_vertex_range face_handle::incident_vertices() const
 {
-    return {*this};
+    return face_vertex_range{*this};
 }
 
 face_face_range face_handle::adjacent_faces() const
 {
-    return {*this};
+    return face_face_range{*this};
 }
 
 face_halfedge_range face_handle::incident_halfedges() const
 {
-    return {*this};
+    return face_halfedge_range{*this};
 }
 
 face_edge_range face_handle::incident_edges() const
 {
-    return {*this};
+    return face_edge_range{*this};
 }
 
 }

@@ -22,13 +22,13 @@ public:
 
     std::size_t n_vertices() const { return rows_ * cols_; }
     std::size_t n_faces() const { return 2 * n_vertices(); }
-    std::size_t n_edges() const { return 3 * n_vertices(); }
     std::size_t n_halfedges() const { return 2 * n_edges(); }
+    std::size_t n_edges() const { return 3 * n_vertices(); }
 
-    vertex_range vertices()  const { return {*this, 0, n_vertices()};  }
-    vertex_range faces()     const { return {*this, 0, n_faces()};     }
-    vertex_range halfedges() const { return {*this, 0, n_halfedges()}; }
-    vertex_range edges()     const { return {*this, 0, n_edges()};     }
+    vertex_range   vertices()  const { return {*this, 0, n_vertices()};  }
+    face_range     faces()     const { return {*this, 0, n_faces()};     }
+    halfedge_range halfedges() const { return {*this, 0, n_halfedges()}; }
+    edge_range     edges()     const { return {*this, 0, n_edges()};     }
 
 private:
     std::size_t cols_;
