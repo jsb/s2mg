@@ -36,6 +36,6 @@ TEST_F(map_data_test, simple_arithmetic) {
         }
     }
     for (auto fh : map.faces()) {
-        ASSERT_DOUBLE_EQ(9, fi[fh]);
+        ASSERT_EQ(9, fi[fh]);
     }
 }
