@@ -20,3 +20,22 @@ TEST_F(map_data_test, expected_sizes) {
     EXPECT_EQ(map.n_halfedges(), hi.size());
     EXPECT_EQ(map.n_edges(),     ei.size());
 }
+
+TEST_F(map_data_test, simple_arithmetic) {
+    s2mg::face_data<int> fi{map};
+    {
+        s2mg::vertex_data<int> vi{map};
+        for (auto vh : map.vertices()) {
+            vi[vh] = 3;
+        }
+        for (auto fh : map.faces()) {
+            fi[fh] = 0;
+            for (auto fvh : fh.incident_vertices()) {
+                fi[fh] += vi[fvh];
+            }
+        }
+    }
+    for (auto fh : map.faces()) {
+        ASSERT_DOUBLE_EQ(9, fi[fh]);
+    }
+}
