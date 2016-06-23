@@ -16,8 +16,8 @@ public:
     std::vector<swd_animal> animals;
 
 public:
-    swd_file(const std::string& _filename);
-    swd_file(std::istream& _infile);
+    explicit swd_file(const std::string& _filename);
+    explicit swd_file(std::istream& _infile);
 
     void read(const std::string& _filename);
     void read(std::istream& _infile);
