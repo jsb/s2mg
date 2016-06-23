@@ -4,14 +4,14 @@
 
 namespace s2mg {
 
-enum class animal_type : uint8_t
+enum class animal_type
 {
-    rabbit = 0x01,
-    fox    = 0x02,
-    stag   = 0x03,
-    roe    = 0x04,
-    duck   = 0x05,
-    sheep  = 0x06,
+    rabbit,
+    fox,
+    stag,
+    roe,
+    duck,
+    sheep,
 };
 
 }
