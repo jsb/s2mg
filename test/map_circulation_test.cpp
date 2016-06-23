@@ -1,8 +1,8 @@
 #include "gtest/gtest.h"
 
-#include <s2mg/map/map_dimensions.hpp>
-#include <s2mg/map/handles.hpp>
-#include <s2mg/map/map_data.hpp>
+#include <s2mg/map_data/map_dimensions.hpp>
+#include <s2mg/map_data/handles.hpp>
+#include <s2mg/map_data/map_data.hpp>
 
 class map_circulation_test : public ::testing::Test
 {

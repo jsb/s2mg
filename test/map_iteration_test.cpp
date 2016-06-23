@@ -1,7 +1,7 @@
 #include "gtest/gtest.h"
 
-#include <s2mg/map/map_dimensions.hpp>
-#include <s2mg/map/handles.hpp>
+#include <s2mg/map_data/map_dimensions.hpp>
+#include <s2mg/map_data/handles.hpp>
 
 class map_iteration_test : public ::testing::Test
 {
