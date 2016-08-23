@@ -4,6 +4,7 @@
 #include <cassert>
 
 #include "iterators/ranges.hpp"
+#include "coord.hpp"
 
 namespace s2mg {
 
@@ -29,6 +30,8 @@ public:
     face_range     faces()     const { return {*this, 0, n_faces()};     }
     halfedge_range halfedges() const { return {*this, 0, n_halfedges()}; }
     edge_range     edges()     const { return {*this, 0, n_edges()};     }
+
+    vertex_handle vertex_at(const coord& _coord) const;
 
 private:
     std::size_t cols_;

@@ -40,4 +40,9 @@ vertex_edge_range vertex_handle::incident_edges() const
     return vertex_edge_range{*this};
 }
 
+coord vertex_handle::to_coord() const
+{
+    return {index() % map().cols(), index() / map().cols()};
+}
+
 }

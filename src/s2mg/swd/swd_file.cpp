@@ -6,6 +6,36 @@
 
 namespace s2mg {
 
+swd_file::swd_file(std::size_t _width, std::size_t _height)
+{
+    // Prepare an empty map with the given grid size
+
+    // Default header data
+    std::memset(reinterpret_cast<char*>(&header), sizeof(header), 0);
+    std::strcpy(header.identifier, "WORLD_V1.10");
+    header.display_width = _width;
+    header.display_height = _height;
+    header.post_header[0] = 0x11;
+    header.post_header[1] = 0x27;
+    header.width = _width;
+    header.height = _height;
+
+    // Blocks
+    for (auto& b : blocks) {
+        // Default header data
+        std::memset(reinterpret_cast<char*>(&b.header), sizeof(b.header), 0);
+        b.header.identifier[0] = 0x10;
+        b.header.identifier[1] = 0x27;
+        b.header.width = _width;
+        b.header.height = _height;
+        b.header.unknown[0] = 0x01;
+        b.header.block_size = _width * _height;
+
+        // Block data
+        b.data.assign(_width * _height, 0);
+    }
+}
+
 swd_file::swd_file(const std::string& _filename)
 {
     read(_filename);
@@ -56,6 +86,7 @@ void swd_file::read(std::istream& _infile)
     }
 
     // Read additional animal data until terminal 0xFF
+    animals.clear();
     do {
         if (_infile.peek() == 0xFF) {
             // Found terminal character

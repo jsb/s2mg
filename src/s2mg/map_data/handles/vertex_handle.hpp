@@ -2,6 +2,7 @@
 
 #include "map_handle.hpp"
 #include "face_orientation.hpp"
+#include "../coord.hpp"
 
 namespace s2mg {
 
@@ -31,6 +32,8 @@ public:
     vertex_face_range     incident_faces() const;
     vertex_halfedge_range incident_halfedges() const;
     vertex_edge_range     incident_edges() const;
+
+    coord to_coord() const;
 };
 
 }
