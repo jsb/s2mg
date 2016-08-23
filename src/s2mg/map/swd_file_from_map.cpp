@@ -2,6 +2,8 @@
 
 #include <s2mg/map/map.hpp>
 
+#include <cstring>
+
 namespace s2mg {
 
 swd_file swd_file_from_map(const map& _map)
