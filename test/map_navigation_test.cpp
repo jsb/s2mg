@@ -89,3 +89,9 @@ TEST_F(map_navigation_test, vertex_to_halfedge) {
     }
 }
 
+TEST_F(map_navigation_test, vertex_to_coord_to_vertex) {
+    for (std::size_t v_index = 0; v_index < dims.n_vertices(); ++v_index) {
+        s2mg::vertex_handle vh{dims, v_index};
+        EXPECT_EQ(vh, dims.vertex_at(vh.to_coord()));
+    }
+}
