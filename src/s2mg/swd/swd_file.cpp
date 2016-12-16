@@ -11,7 +11,7 @@ swd_file::swd_file(std::size_t _width, std::size_t _height)
     // Prepare an empty map with the given grid size
 
     // Default header data
-    std::memset(reinterpret_cast<char*>(&header), sizeof(header), 0);
+    std::memset(reinterpret_cast<char*>(&header), 0, sizeof(header));
     std::strcpy(header.identifier, "WORLD_V1.10");
     header.display_width = _width;
     header.display_height = _height;
@@ -23,7 +23,7 @@ swd_file::swd_file(std::size_t _width, std::size_t _height)
     // Blocks
     for (auto& b : blocks) {
         // Default header data
-        std::memset(reinterpret_cast<char*>(&b.header), sizeof(b.header), 0);
+        std::memset(reinterpret_cast<char*>(&b.header), 0, sizeof(b.header));
         b.header.identifier[0] = 0x10;
         b.header.identifier[1] = 0x27;
         b.header.width = _width;
