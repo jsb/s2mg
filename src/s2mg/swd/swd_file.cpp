@@ -12,9 +12,13 @@ swd_file::swd_file(std::size_t _width, std::size_t _height)
 
     // Default header data
     std::memset(reinterpret_cast<char*>(&header), 0, sizeof(header));
-    std::strcpy(header.identifier, "WORLD_V1.10");
+    std::strncpy(header.identifier, "WORLD_V1.0", 10);
+    std::strcpy(header.title, "Unnamed");
     header.display_width = _width;
     header.display_height = _height;
+    header.terrain_type = 0;
+    header.num_players = 1;
+    std::strcpy(header.author, "Unknown");
     header.post_header[0] = 0x11;
     header.post_header[1] = 0x27;
     header.width = _width;

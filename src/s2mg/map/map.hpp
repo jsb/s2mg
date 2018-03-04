@@ -35,6 +35,15 @@ struct map
 
     std::vector<animal_spawn> animals;
     std::vector<vertex_handle> player_headquarters;
+
+    explicit map(map_dimensions _dims) :
+        dimensions{std::move(_dims)},
+        altitude{dimensions},
+        texture{dimensions},
+        objects{dimensions},
+        minerals{dimensions}
+    {
+    }
 };
 
 }

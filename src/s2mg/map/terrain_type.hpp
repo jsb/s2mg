@@ -16,7 +16,6 @@ enum class terrain_type
     swamp,
     snow,
     lava,
-    color, // ?
 };
 
 }

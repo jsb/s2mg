@@ -30,7 +30,7 @@ struct __attribute__((packed)) swd_block_header
     uint8_t  identifier[6]; // #10 27 00 00 00 00
     uint16_t width;
     uint16_t height;
-    char     unknown[2]; // #01 00
+    uint8_t  unknown[2]; // #01 00
     uint32_t block_size; // == width * height
 };
 static_assert(sizeof(swd_block_header) == 16, "invalid block header size");
@@ -38,7 +38,7 @@ static_assert(sizeof(swd_block_header) == 16, "invalid block header size");
 struct swd_block
 {
     swd_block_header header;
-    std::vector<char> data;
+    std::vector<uint8_t> data;
 };
 
 struct __attribute__((packed)) swd_animal
