@@ -113,7 +113,9 @@ swd_file swd_file_from_map(const map& _map)
     }
 
     // Block 0: Altitude
+    map_data<vertex_handle, uint8_t> encoded_altitudes{_map.dimensions};
     for (auto vh : dim.vertices()) {
+        encoded_altitudes[vh] = encode_altitude(_map.altitude[vh]);
         result.blocks[0].data[vh.index()] = encode_altitude(_map.altitude[vh]);
     }
 
@@ -164,8 +166,15 @@ swd_file swd_file_from_map(const map& _map)
 
     // Block 12: Shading
     for (auto vh : dim.vertices()) {
-        // TODO: compute from map altitudes
-        result.blocks[12].data[vh.index()] = 0x40; // even
+        int shading = 0x40;
+        shading += 9 * encoded_altitudes[vh];
+        shading += 9 * encoded_altitudes[vh.vh_ne()];
+        shading -= 6 * encoded_altitudes[vh.vh_w()];
+        shading -= 3 * encoded_altitudes[vh.vh_w().vh_w()];
+        shading -= 9 * encoded_altitudes[vh.vh_w().vh_sw()];
+        shading = std::max(shading, 0);
+        shading = std::min(shading, 255);
+        result.blocks[12].data[vh.index()] = shading;
     }
 
     // Block 13 is unknown
