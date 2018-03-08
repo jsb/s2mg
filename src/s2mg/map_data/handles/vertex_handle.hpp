@@ -22,6 +22,11 @@ public:
     {
     }
 
+    vertex_handle(const map_dimensions& _map, const coord& _coord) :
+        map_handle(_map, _coord.y * _map.cols() + _coord.x)
+    {
+    }
+
     //! One arbitrary outgoing halfedge handle
     halfedge_handle heh() const;
 
@@ -32,6 +37,19 @@ public:
     vertex_face_range     incident_faces() const;
     vertex_halfedge_range incident_halfedges() const;
     vertex_edge_range     incident_edges() const;
+
+    //! vertex to the east
+    vertex_handle vh_e() const;
+    //! vertex to the northeast
+    vertex_handle vh_ne() const;
+    //! vertex to the northwest
+    vertex_handle vh_nw() const;
+    //! vertex to the west
+    vertex_handle vh_w() const;
+    //! vertex to the southwest
+    vertex_handle vh_sw() const;
+    //! vertex to the southeast
+    vertex_handle vh_se() const;
 
     coord to_coord() const;
 };
