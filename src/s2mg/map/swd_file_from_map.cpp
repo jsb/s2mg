@@ -4,6 +4,7 @@
 #include <s2mg/random.hpp>
 
 #include <cstring>
+#include <tuple>
 
 namespace s2mg {
 
@@ -85,6 +86,19 @@ std::pair<uint8_t, uint8_t> encode_object(object_type _o)
     }
 }
 
+uint8_t encode_altitude(double _altitude)
+{
+    if (_altitude >= 1.0) {
+        return 255;
+    }
+    else if (_altitude <= 0.0) {
+        return 0;
+    }
+    else {
+        return 255 * _altitude;
+    }
+}
+
 swd_file swd_file_from_map(const map& _map)
 {
     const auto& dim = _map.dimensions;
@@ -100,7 +114,7 @@ swd_file swd_file_from_map(const map& _map)
 
     // Block 0: Altitude
     for (auto vh : dim.vertices()) {
-        result.blocks[0].data[vh.index()] = 0x0A;
+        result.blocks[0].data[vh.index()] = encode_altitude(_map.altitude[vh]);
     }
 
     // Blocks 1 and 2: Texture information
